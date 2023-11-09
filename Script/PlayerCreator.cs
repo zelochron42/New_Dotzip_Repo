@@ -10,7 +10,7 @@ public class PlayerCreator : MonoBehaviourPunCallbacks {
     bool spawnReady = false;
     bool playerSpawned = false;
     private void Start() {
-
+        
     }
     public override void OnJoinedRoom() {
         base.OnJoinedRoom();
@@ -26,5 +26,7 @@ public class PlayerCreator : MonoBehaviourPunCallbacks {
             playerSpawned = true;
             SpawnPlayer();
         }
+        if (PhotonNetwork.IsConnectedAndReady)
+            spawnReady = true;
     }
 }
