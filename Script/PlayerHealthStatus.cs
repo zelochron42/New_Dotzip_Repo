@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHealthStatus : MonoBehaviour
 {
+    public static event Action OnPlayerDeath; 
     public int MaxHealth = 10;
     public int currentHealth;
 
@@ -31,5 +33,9 @@ public class PlayerHealthStatus : MonoBehaviour
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
+
+        // Display Game Over Screen
+        // reference of this script: 
+        OnPlayerDeath?.Invoke();
     }
 }

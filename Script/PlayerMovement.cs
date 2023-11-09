@@ -12,12 +12,28 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer SpriteRenderer;
     Rigidbody2D rb2d;
     Collider2D col2d;
+
+    
+    private void OnEnable() // reference for the script:
+    {
+        PlayerHealthStatus.OnPlayerDeath += DisablePlayerMovement;
+    }
+
+    private void OnDisable() // reference for the script:
+    {
+        PlayerHealthStatus.OnPlayerDeath -= DisablePlayerMovement;
+    }
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         col2d = GetComponent<Collider2D>();
+<<<<<<< Updated upstream:PlayerMovement.cs
         animator = GetComponent<Animator>();
         SpriteRenderer = GetComponent<SpriteRenderer>();
+=======
+
+        EnablePlayerMovement(); // reference for this script: 
+>>>>>>> Stashed changes:Script/PlayerMovement.cs
     }
 
     // Update is called once per frame
@@ -47,5 +63,17 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D hit = Physics2D.BoxCast(transform.position, col2d.bounds.size * 0.98f, 0f, Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
         return hit;
 
+    }
+
+    private void DisablePlayerMovement() // reference for the script:
+    {
+        //animator.enabled = false;
+        rb2d.bodyType = RigidbodyType2D.Static;
+    }
+
+    private void EnablePlayerMovement() // reference for the script:
+    {
+        //animator.enabled = true;
+        rb2d.bodyType = RigidbodyType2D.Dynamic;
     }
 }
