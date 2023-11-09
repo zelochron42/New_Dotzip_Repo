@@ -21,11 +21,21 @@ public class PlayerHealthStatus : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (other.gameObject.CompareTag("Spike"))
         {
             TakeDamage(1);
+        }
+
+        if (other.gameObject.CompareTag("Bomb"))
+        {
+            TakeDamage(2);
+        }
+
+        if (other.gameObject.CompareTag("Poison"))
+        {
+            TakeDamage(4);
         }
     }
     void TakeDamage(int damage)
