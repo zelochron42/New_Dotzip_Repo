@@ -27,13 +27,10 @@ public class PlayerMovement : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();
         col2d = GetComponent<Collider2D>();
-<<<<<<< Updated upstream:PlayerMovement.cs
         animator = GetComponent<Animator>();
         SpriteRenderer = GetComponent<SpriteRenderer>();
-=======
 
         EnablePlayerMovement(); // reference for this script: 
->>>>>>> Stashed changes:Script/PlayerMovement.cs
     }
 
     // Update is called once per frame
