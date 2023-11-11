@@ -43,7 +43,7 @@ public class PlayerHealthStatus : MonoBehaviour
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
-
+        // Also make sure to have it play the death animation then the Gameover screen. -Robert
         // Display Game Over Screen
         // reference of this script: 
         OnPlayerDeath?.Invoke();
