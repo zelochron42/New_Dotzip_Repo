@@ -45,14 +45,14 @@ public class PlayerMovement : MonoBehaviour
         }
         rb2d.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * walkSpeed, yVel);
         // this calls the animation
-        if (Input.GetKey(KeyCode.RightArrow)) animator.SetBool("Walkingbool", true);
-        else if (Input.GetKey(KeyCode.LeftArrow)) animator.SetBool("Walkingbool", true);
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) animator.SetBool("Walkingbool", true);
+        else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) animator.SetBool("Walkingbool", true);
         else animator.SetBool("Walkingbool", false);
 
         // This flips the sprits when going left
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
          SpriteRenderer.flipX = true;
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
          SpriteRenderer.flipX = false;
     }
 
