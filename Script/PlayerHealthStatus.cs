@@ -10,6 +10,8 @@ public class PlayerHealthStatus : MonoBehaviour
     public int currentHealth;
 
     public HealthBar healthBar;
+    internal float maxHealth;
+
     // Start is called before the first frame update
     void Start()
     {
