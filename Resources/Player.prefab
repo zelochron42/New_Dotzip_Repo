@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: -6797825812102823378}
   - component: {fileID: -6057784101558647549}
   - component: {fileID: 2125236272}
+  - component: {fileID: 3538090927064751656}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -168,7 +169,7 @@ MonoBehaviour:
   m_SynchronizeVelocity: 1
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 1
-  m_TeleportIfDistanceGreaterThan: 3
+  m_TeleportIfDistanceGreaterThan: 2
 --- !u!114 &511968544534235429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,3 +240,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &3538090927064751656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511968544534235455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8d0727d5ae3244e3b569694d3912374, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 2125236272}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// script for creating admin pings wherever the user clicks
@@ -20,7 +21,7 @@ public class AdminPings : MonoBehaviourPunCallbacks {
     void Update()
     {
         timeSincePing += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1") && timeSincePing > pingCooldown) {
+        if (Input.GetButtonDown("Fire1") && !EventSystem.current.IsPointerOverGameObject() && timeSincePing > pingCooldown) {
             timeSincePing = 0f;
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             GameObject newPing = PhotonNetwork.Instantiate(pingObject.name, mousePos, pingObject.transform.rotation);

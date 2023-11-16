@@ -2568,5 +2568,10 @@ namespace Photon.Pun
                 }
             }
         }
+
+        public static void Instantiate(GameObject gameObject, Vector2 randomSpawnPoint, Quaternion identity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
