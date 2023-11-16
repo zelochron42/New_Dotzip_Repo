@@ -12,6 +12,7 @@ public class PlayerRoleManager : MonoBehaviourPunCallbacks
     [SerializeField] int minimumPlayerCount;
     [SerializeField] List<Player> readyPlayers = new List<Player>();
     [SerializeField] TextMeshProUGUI text;
+    [SerializeField] GameObject adminObject;
     bool matchQueueing = false;
     PhotonView thisView;
 
@@ -61,6 +62,12 @@ public class PlayerRoleManager : MonoBehaviourPunCallbacks
         }
     }
 
+    [PunRPC]
+    private void SetAdmin() {
+        GameObject myAdmin = Instantiate(adminObject);
+        DontDestroyOnLoad(myAdmin);
+    }
+
     public void StartGame() {
         StartCoroutine("StartupRoutine");
     }
@@ -72,7 +79,16 @@ public class PlayerRoleManager : MonoBehaviourPunCallbacks
             yield break;
         }
         SetAllText("Starting game...");
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
+
+        SetAllText("Choosing admin...");
+        Player admin = readyPlayers[Random.Range(0, readyPlayers.Count)];
+        thisView.RPC("SetAdmin", admin);
+        yield return new WaitForSeconds(1f);
+
+        SetAllText("One moment please...");
+        yield return new WaitForSeconds(1f);
+
         if (CheckPlayerReady())
             SceneManager.LoadScene(gameScene);
         else {
