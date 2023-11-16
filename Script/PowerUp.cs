@@ -24,13 +24,13 @@ public class PowerUp : MonoBehaviour
         Debug.Log("Pickup has been done.");
 
         PlayerHealthStatus status = player.GetComponent<PlayerHealthStatus>();
-        status.maxHealth *= multiplier; // internal float maxHealth was added in the PlayerHealthStatus script for it to work. Please add changes if needed - Devone
+        //status.maxHealth *= multiplier; // internal float maxHealth was added in the PlayerHealthStatus script for it to work. Please add changes if needed - Devone
 
         GetComponent<MeshRenderer>().enabled = false;
         GetComponent<Collider2D>().enabled = false;
 
         yield return new WaitForSeconds(duration);
-        status.maxHealth /= multiplier;
+        //status.maxHealth /= multiplier;
         Destroy(gameObject);
     }
 }

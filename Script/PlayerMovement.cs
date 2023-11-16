@@ -16,12 +16,12 @@ public class PlayerMovement : MonoBehaviour
     
     private void OnEnable() // reference for the script:
     {
-        PlayerHealthStatus.OnPlayerDeath += DisablePlayerMovement;
+        //PlayerHealthStatus.OnPlayerDeath += DisablePlayerMovement;
     }
 
     private void OnDisable() // reference for the script:
     {
-        PlayerHealthStatus.OnPlayerDeath -= DisablePlayerMovement;
+        //PlayerHealthStatus.OnPlayerDeath -= DisablePlayerMovement;
     }
     void Start()
     {
