@@ -1,20 +1,13 @@
-<<<<<<< HEAD
-=======
-using System;
 using System.Collections;
 using System.Collections.Generic;
->>>>>>> cdb38691e961883544e7ae640877557868203b74
 using UnityEngine;
 
 public class PlayerHealthStatus : MonoBehaviour
 {
-    public static event Action OnPlayerDeath; 
     public int MaxHealth = 10;
     public int currentHealth;
 
     public HealthBar healthBar;
-    internal float maxHealth;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -51,9 +44,5 @@ public class PlayerHealthStatus : MonoBehaviour
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
-        // Also make sure to have it play the death animation then the Gameover screen. -Robert
-        // Display Game Over Screen
-        // reference of this script: 
-        OnPlayerDeath?.Invoke();
     }
 }
