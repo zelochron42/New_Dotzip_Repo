@@ -14,12 +14,9 @@ public class PlayerMovement : MonoBehaviour
     Collider2D col2d;
 
     PlayerHealthStatus playerHealth;
+    GameObject gameOverCanvas;
 
     
-    private void OnEnable() // reference for the script:
-    {
-        playerHealth.OnPlayerDeath.AddListener(DestroyPlayer);
-    }
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -27,6 +24,12 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         SpriteRenderer = GetComponent<SpriteRenderer>();
         playerHealth = FindObjectOfType<PlayerHealthStatus>();
+        gameOverCanvas = FindObjectOfType<UIManager>().gameObject;
+        gameOverCanvas.SetActive(false);
+        playerHealth.OnPlayerDeath.AddListener(() => {
+            DestroyPlayer();
+            gameOverCanvas.SetActive(true);
+        });
     }
 
     // Update is called once per frame
