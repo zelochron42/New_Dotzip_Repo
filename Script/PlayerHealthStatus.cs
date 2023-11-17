@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerHealthStatus : MonoBehaviour
 {
-    public int MaxHealth = 10;
+    public UnityEvent OnPlayerDeath;
+
+    public int maxHealth = 10;
     public int currentHealth;
 
     public HealthBar healthBar;
@@ -14,8 +17,8 @@ public class PlayerHealthStatus : MonoBehaviour
         healthBar = FindObjectOfType<HealthBar>();
         if (!healthBar)
             Debug.LogError("No health bar");
-        currentHealth = MaxHealth;
-        healthBar.SetMaxHealth(MaxHealth);
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     // Update is called once per frame
@@ -42,6 +45,10 @@ public class PlayerHealthStatus : MonoBehaviour
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
+
+        if (currentHealth <= 0) {
+            OnPlayerDeath.Invoke();
+        }
 
         healthBar.SetHealth(currentHealth);
     }

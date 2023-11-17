@@ -13,15 +13,12 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb2d;
     Collider2D col2d;
 
+    PlayerHealthStatus playerHealth;
+
     
     private void OnEnable() // reference for the script:
     {
-        //PlayerHealthStatus.OnPlayerDeath += DisablePlayerMovement;
-    }
-
-    private void OnDisable() // reference for the script:
-    {
-        //PlayerHealthStatus.OnPlayerDeath -= DisablePlayerMovement;
+        playerHealth.OnPlayerDeath.AddListener(DestroyPlayer);
     }
     void Start()
     {
@@ -29,8 +26,7 @@ public class PlayerMovement : MonoBehaviour
         col2d = GetComponent<Collider2D>();
         animator = GetComponent<Animator>();
         SpriteRenderer = GetComponent<SpriteRenderer>();
-
-        EnablePlayerMovement(); // reference for this script: 
+        playerHealth = FindObjectOfType<PlayerHealthStatus>();
     }
 
     // Update is called once per frame
@@ -62,15 +58,8 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void DisablePlayerMovement() // reference for the script:
+    private void DestroyPlayer() // reference for the script:
     {
-        //animator.enabled = false;
-        rb2d.bodyType = RigidbodyType2D.Static;
-    }
-
-    private void EnablePlayerMovement() // reference for the script:
-    {
-        //animator.enabled = true;
-        rb2d.bodyType = RigidbodyType2D.Dynamic;
+        Destroy(gameObject);
     }
 }
