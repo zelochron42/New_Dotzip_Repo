@@ -6,16 +6,6 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     public GameObject gameOverMenu;
-
-    private void OnEnable()
-    {
-        //PlayerHealthStatus.OnPlayerDeath += EnableGameOverMenu;
-    }
-
-    private void OnDisable()
-    {
-        //PlayerHealthStatus.OnPlayerDeath -= EnableGameOverMenu;
-    }
     public void EnableGameOverMenu()
     {
         gameOverMenu.SetActive(true);
@@ -23,11 +13,11 @@ public class UIManager : MonoBehaviour
 
     public void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void GoToMainMenu()
     {
-        SceneManager.LoadScene(0);
+        //SceneManager.LoadScene(0);
     }
 }

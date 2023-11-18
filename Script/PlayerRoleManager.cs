@@ -90,7 +90,7 @@ public class PlayerRoleManager : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(1f);
 
         if (CheckPlayerReady())
-            SceneManager.LoadScene(gameScene);
+            LoadGameScene();
         else {
             readyPlayers = new List<Player>();
             SetAllText("Unready players detected, cancelling game...");
@@ -98,6 +98,10 @@ public class PlayerRoleManager : MonoBehaviourPunCallbacks
             matchQueueing = false;
         }
         yield break;
+    }
+
+    public void LoadGameScene() {
+        SceneManager.LoadScene(gameScene);
     }
 
     bool CheckPlayerReady() {

@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 // reference: https://youtu.be/zc8ac_qUXQY?si=agBGmtx-BAxKd1zy
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] string levelScene;
     public void StartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(levelScene);
     }
 
     public void ExitGame()

@@ -15,11 +15,20 @@ public class AdminPings : MonoBehaviourPunCallbacks {
     [SerializeField] float pingCooldown = 1f;
     float timeSincePing = 0f;
     Camera mainCam;
+    UIManager gameOverCanvas;
     void Start()
     {
+        
     }
     void Update()
     {
+        if (!gameOverCanvas) {
+            gameOverCanvas = FindObjectOfType<UIManager>();
+            if (gameOverCanvas) {
+                gameOverCanvas.gameObject.SetActive(false);
+            }
+        }
+
         timeSincePing += Time.deltaTime;
         if (Input.GetButtonDown("Fire1") && !EventSystem.current.IsPointerOverGameObject() && timeSincePing > pingCooldown) {
             timeSincePing = 0f;
