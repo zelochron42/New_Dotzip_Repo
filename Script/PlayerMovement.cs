@@ -15,8 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
     PlayerHealthStatus playerHealth;
     GameObject gameOverCanvas;
+    internal float moveSpeed;
 
-    
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
