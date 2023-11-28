@@ -968,7 +968,13 @@ MonoBehaviour:
   - prefab: {fileID: 296387864283009776, guid: 4b3d5f669f1f7144390d85c2d391cd9a, type: 3}
     fixedOffset: {x: 0, y: 5.89}
     randomOffset: {x: 10.5, y: 0.66}
-    spawnDelay: 30
+    spawnDelay: 45
+    timeSinceLastSpawn: 0
+    displayGizmos: 0
+  - prefab: {fileID: 296387864283009776, guid: b38f341c1714dc14dbadc84e2034829a, type: 3}
+    fixedOffset: {x: 0, y: -5.89}
+    randomOffset: {x: 10.5, y: 0.66}
+    spawnDelay: 75
     timeSinceLastSpawn: 0
     displayGizmos: 0
   hazards:
