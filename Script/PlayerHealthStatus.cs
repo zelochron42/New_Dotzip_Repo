@@ -52,4 +52,9 @@ public class PlayerHealthStatus : MonoBehaviour
 
         healthBar.SetHealth(currentHealth);
     }
+    public void Heal(int health) {
+        currentHealth += health;
+        currentHealth = Mathf.Min(maxHealth, health);
+        healthBar.SetHealth(currentHealth);
+    }
 }
