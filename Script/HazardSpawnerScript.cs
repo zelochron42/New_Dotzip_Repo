@@ -11,13 +11,24 @@ public class HazardSpawnerScript : MonoBehaviour
     [SerializeField] bool debugMode;
     [System.Serializable]
     private class HazardData {
+        [Tooltip("This object will be spawned regularly")]
         public GameObject prefab;
+        [Tooltip("If true, objects only spawn for the admin"+
+                "\n(ENABLE THIS FOR OBJECT PRESPAWNERS)")]
         public bool localSpawnOnly;
+        [Tooltip("Base offset for spawned object from the camera's center")]
         public Vector2 fixedOffset;
+        [Tooltip("Maximum X and Y values for randomizing object's position relative to camera")]
         public Vector2 randomOffset;
-        public int spawnDelay;
+        [Tooltip("The maximum amount of fixed frames until the object spawns again")]
+        public int maxSpawnDelay;
+        [Tooltip("The percentage of frames that can be randomly skipped"+
+                "\n(0% means objects spawn at a fixed rate, 100% means objects can randomly spawn with any delay below the max)")]
+        [Range(0f, 100f)]
+        public float delayRandomness;
         [HideInInspector]
         public int timeSinceLastSpawn = 0;
+        [Tooltip("Uses gizmos to show the area this object can spawn in based on fixed and random offsets")]
         public bool displayGizmos;
     }
     bool adminClient = false;
@@ -55,8 +66,10 @@ public class HazardSpawnerScript : MonoBehaviour
         Vector2 camPos = Camera.main.transform.position;
         foreach (HazardData hd in hazardList) {
             hd.timeSinceLastSpawn++;
-            if (hd.timeSinceLastSpawn > hd.spawnDelay) {
+            if (hd.timeSinceLastSpawn > hd.maxSpawnDelay) {
                 hd.timeSinceLastSpawn = 0;
+                if (hd.delayRandomness > 0f)
+                    hd.timeSinceLastSpawn += (int)(Random.Range(0f, hd.maxSpawnDelay) * hd.delayRandomness / 100f);
                 float XLimit = Mathf.Abs(hd.randomOffset.x);
                 float YLimit = Mathf.Abs(hd.randomOffset.y);
                 Vector2 randomizedOffset = new Vector2(Random.Range(-XLimit, XLimit), Random.Range(-YLimit, YLimit));

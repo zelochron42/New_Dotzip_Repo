@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c54bdb5e9077a248adf325a71ac2fce, type: 3}
   m_Name: FlashBang
   m_EditorClassIdentifier: 
-  amount: -5
+  amount: 6

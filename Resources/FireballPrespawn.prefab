@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4966357882465765055}
   - component: {fileID: 1423223945526351784}
   m_Layer: 0
-  m_Name: ReversePoisonPrespawn
+  m_Name: FireballPrespawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,9 +75,9 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 7482667652216324306, guid: 8f15071638308014caa3e0bb116277d3, type: 3}
-  m_Color: {r: 0, g: 0.36862746, b: 0.95294124, a: 1}
+  m_Color: {r: 0.95294124, g: 0, b: 0, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
@@ -97,5 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d55bc523a173e546b0b4e1f8c00d742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayTime: 3
-  spawnObject: {fileID: 296387864283009776, guid: b38f341c1714dc14dbadc84e2034829a, type: 3}
+  delayTime: 2.5
+  spawnObject: {fileID: 296387864283009776, guid: 3506575643f909641a2733139ebfd833, type: 3}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4966357882465765055}
   - component: {fileID: 1423223945526351784}
   m_Layer: 0
-  m_Name: PoisonPrespawn
+  m_Name: ReverseFireballPrespawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,9 +75,9 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_Sprite: {fileID: 7482667652216324306, guid: 8f15071638308014caa3e0bb116277d3, type: 3}
-  m_Color: {r: 0.95294124, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.9529412, g: 0.04603671, b: 0, a: 1}
   m_FlipX: 0
-  m_FlipY: 1
+  m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
@@ -97,5 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d55bc523a173e546b0b4e1f8c00d742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayTime: 3.5
-  spawnObject: {fileID: 296387864283009776, guid: 4b3d5f669f1f7144390d85c2d391cd9a, type: 3}
+  delayTime: 2.5
+  spawnObject: {fileID: 296387864283009776, guid: 3132fb973e9c48f478a332a41dd124b2, type: 3}

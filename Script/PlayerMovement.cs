@@ -15,7 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
     PlayerHealthStatus playerHealth;
     GameObject gameOverCanvas;
-    internal float moveSpeed;
+    public float moveSpeed;
+    [SerializeField] float bonusSpeedDecay = 0.01f;
 
     void Start()
     {
@@ -37,12 +38,18 @@ public class PlayerMovement : MonoBehaviour
     {
        Move();
     }
+    private void FixedUpdate() {
+        if (moveSpeed > 0f)
+            moveSpeed -= bonusSpeedDecay;
+        else
+            moveSpeed = 0f;
+    }
     private void Move ()
     { float yVel = rb2d.velocity.y;
         if (Input.GetButtonDown("Jump") && GroundCheck()) {
             yVel = jumpForce;
         }
-        rb2d.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * walkSpeed, yVel);
+        rb2d.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * (walkSpeed + moveSpeed), yVel);
         // this calls the animation
         if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) animator.SetBool("Walkingbool", true);
         else if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) animator.SetBool("Walkingbool", true);
