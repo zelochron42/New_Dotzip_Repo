@@ -8,9 +8,11 @@ using Photon.Pun;
 /// </summary>
 public class HazardSpawnerScript : MonoBehaviour
 {
+    [SerializeField] bool debugMode;
     [System.Serializable]
     private class HazardData {
         public GameObject prefab;
+        public bool localSpawnOnly;
         public Vector2 fixedOffset;
         public Vector2 randomOffset;
         public int spawnDelay;
@@ -18,22 +20,35 @@ public class HazardSpawnerScript : MonoBehaviour
         public int timeSinceLastSpawn = 0;
         public bool displayGizmos;
     }
+    bool adminClient = false;
+
     [SerializeField] HazardData[] hazardList;
 
-    public GameObject[] hazards;
+    //public GameObject[] hazards;
     int loopNumber = 0;
+
+    private void Start() {
+        if (debugMode) {
+            adminClient = true;
+            return;
+        }
+        AdminPings ap = FindObjectOfType<AdminPings>();
+        if (ap)
+            adminClient = true;
+        else
+            Destroy(gameObject);
+    }
     void FixedUpdate()
     {
-        if (PhotonNetwork.IsMasterClient) {
+        if (adminClient)
             SpawnHazardFromData();
-            /*
-            loopNumber++;
-            if (loopNumber >= 12) {
-                
-                //HazardSpawn();
-                loopNumber = 0;
-            }*/
-        }
+        /*
+        loopNumber++;
+        if (loopNumber >= 12) {
+
+            //HazardSpawn();
+            loopNumber = 0;
+        }*/
     }
 
     void SpawnHazardFromData() {
@@ -46,19 +61,22 @@ public class HazardSpawnerScript : MonoBehaviour
                 float YLimit = Mathf.Abs(hd.randomOffset.y);
                 Vector2 randomizedOffset = new Vector2(Random.Range(-XLimit, XLimit), Random.Range(-YLimit, YLimit));
                 Vector2 spawnOffset = hd.fixedOffset + randomizedOffset;
-                PhotonNetwork.Instantiate(hd.prefab.name, camPos + spawnOffset, Quaternion.identity);
+                if (hd.localSpawnOnly)
+                    Instantiate(hd.prefab, camPos + spawnOffset, hd.prefab.transform.rotation);
+                else
+                    PhotonNetwork.Instantiate(hd.prefab.name, camPos + spawnOffset, hd.prefab.transform.rotation);
             }
         }
     }
 
-    void HazardSpawn()
+    /*void HazardSpawn()
     {
         int randomIndex = Random.Range(0, hazards.Length);
 
         Vector2 randomSpawnPoint = new Vector2(Random.Range(-10, 11), Random.Range(-10, 11));
 
         PhotonNetwork.Instantiate(hazards[randomIndex].name, randomSpawnPoint, Quaternion.identity);
-    }
+    }*/
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;

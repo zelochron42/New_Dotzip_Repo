@@ -964,21 +964,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ee73adcb90291044880a765b6b9b41f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMode: 0
   hazardList:
-  - prefab: {fileID: 296387864283009776, guid: 4b3d5f669f1f7144390d85c2d391cd9a, type: 3}
+  - prefab: {fileID: 1494494316972530768, guid: c8a559b1e04eb8448bee3cad456a7867, type: 3}
+    localSpawnOnly: 1
     fixedOffset: {x: 0, y: 5.89}
     randomOffset: {x: 10.5, y: 0.66}
-    spawnDelay: 45
+    spawnDelay: 200
     timeSinceLastSpawn: 0
     displayGizmos: 0
-  - prefab: {fileID: 296387864283009776, guid: b38f341c1714dc14dbadc84e2034829a, type: 3}
+  - prefab: {fileID: 1494494316972530768, guid: 4a1a3a7d43a282d47a6dd06a85edcf45, type: 3}
+    localSpawnOnly: 1
     fixedOffset: {x: 0, y: -5.89}
     randomOffset: {x: 10.5, y: 0.66}
-    spawnDelay: 75
+    spawnDelay: 250
     timeSinceLastSpawn: 0
     displayGizmos: 0
-  hazards:
-  - {fileID: 296387864283009776, guid: 4b3d5f669f1f7144390d85c2d391cd9a, type: 3}
 --- !u!4 &391503124
 Transform:
   m_ObjectHideFlags: 0
@@ -1361,6 +1362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a057adefbc5068d4e984ec9dfb2120ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  adminCamSize: 10
 --- !u!1 &540987354
 GameObject:
   m_ObjectHideFlags: 0

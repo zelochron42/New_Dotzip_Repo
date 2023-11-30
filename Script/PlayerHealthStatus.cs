@@ -38,7 +38,7 @@ public class PlayerHealthStatus : MonoBehaviour
 
         if (other.gameObject.CompareTag("Poison"))
         {
-            TakeDamage(4);
+            TakeDamage(3);
             Destroy(other.gameObject);
         }
     }

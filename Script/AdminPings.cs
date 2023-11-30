@@ -11,7 +11,8 @@ using UnityEngine.EventSystems;
 /// </summary>
 
 public class AdminPings : MonoBehaviourPunCallbacks {
-    [SerializeField] GameObject pingObject;
+    [SerializeField] GameObject[] pingObjects;
+    [SerializeField] GameObject currentPingObject;
     [SerializeField] float pingCooldown = 1f;
     float timeSincePing = 0f;
     Camera mainCam;
@@ -22,6 +23,12 @@ public class AdminPings : MonoBehaviourPunCallbacks {
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            currentPingObject = pingObjects[0];
+        }
+        if (Input.GetKeyDown(KeyCode.E)) {
+            currentPingObject = pingObjects[1];
+        }
         if (!gameOverCanvas) {
             gameOverCanvas = FindObjectOfType<UIManager>();
             if (gameOverCanvas) {
@@ -33,13 +40,11 @@ public class AdminPings : MonoBehaviourPunCallbacks {
         if (Input.GetButtonDown("Fire1") && !EventSystem.current.IsPointerOverGameObject() && timeSincePing > pingCooldown) {
             timeSincePing = 0f;
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            GameObject newPing = PhotonNetwork.Instantiate(pingObject.name, mousePos, pingObject.transform.rotation);
+            GameObject newPing = PhotonNetwork.Instantiate(currentPingObject.name, mousePos, currentPingObject.transform.rotation);
 
         }
     }
-
-
     public void SetPingObject(GameObject newObject) {
-        pingObject = newObject;
+        currentPingObject = newObject;
     }
 }
