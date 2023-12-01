@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Photon.Pun;
 
 public class PlayerHealthStatus : MonoBehaviour
 {
@@ -22,26 +23,36 @@ public class PlayerHealthStatus : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Spike"))
-        {
-            TakeDamage(1);
-            Destroy(other.gameObject);
-        }
-
-        if (other.gameObject.CompareTag("Bomb"))
-        {
-            TakeDamage(2);
-            Destroy(other.gameObject);
-        }
-
-        if (other.gameObject.CompareTag("Poison"))
-        {
-            TakeDamage(3);
-            Destroy(other.gameObject);
-        }
+    private void OnTriggerEnter2D(Collider2D other) {
+        GameObject go = other.gameObject;
+        HazardCheck(go);
     }
+    private void OnCollisionEnter2D(Collision2D collision) {
+        GameObject go = collision.gameObject;
+        HazardCheck(go);
+    }
+
+    private void HazardCheck(GameObject go) {
+        int dmg = 0;
+        if (go.CompareTag("Spike"))
+            dmg = 1;
+        else if (go.CompareTag("Bomb"))
+            dmg = 2;
+        else if (go.CompareTag("Poison"))
+            dmg = 3;
+
+        if (dmg <= 0)
+            return;
+        TakeDamage(dmg);
+        PhotonView pv = go.GetComponent<PhotonView>();
+        if (!pv) {
+            Destroy(go);
+            return;
+        }
+        pv.TransferOwnership(PhotonNetwork.LocalPlayer);
+        PhotonNetwork.Destroy(go);
+    }
+
     void TakeDamage(int damage)
     {
         currentHealth -= damage;

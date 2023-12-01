@@ -16,10 +16,10 @@ public class PlayerScript : MonoBehaviourPunCallbacks
         {
             PlayerMovement pm = GetComponent<PlayerMovement>();
             if (pm)
-                pm.enabled = false;
+                Destroy(pm);
             PlayerHealthStatus phs = GetComponent<PlayerHealthStatus>();
             if (phs)
-                phs.enabled = false;
+                Destroy(phs);
         }
         DontDestroyOnLoad(gameObject);
     }
