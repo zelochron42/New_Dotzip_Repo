@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 // reference: https://youtu.be/zc8ac_qUXQY?si=agBGmtx-BAxKd1zy
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] string levelScene;
+    [SerializeField] string VisctoryScene;
     public void StartGame()
     {
-        SceneManager.LoadScene(levelScene);
+        SceneManager.LoadScene(VisctoryScene);
     }
 
     public void ExitGame()
