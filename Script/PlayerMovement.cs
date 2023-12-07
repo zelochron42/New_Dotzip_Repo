@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator animator;
     private SpriteRenderer SpriteRenderer;
+    private AudioSource jumpSound;
     Rigidbody2D rb2d;
     Collider2D col2d;
 
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         col2d = GetComponent<Collider2D>();
         animator = GetComponent<Animator>();
+        jumpSound = GetComponent<AudioSource>();
         SpriteRenderer = GetComponent<SpriteRenderer>();
         playerHealth = FindObjectOfType<PlayerHealthStatus>();
         gameOverCanvas = FindObjectOfType<UIManager>().gameObject;
@@ -56,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
     { float yVel = rb2d.velocity.y;
         if (Input.GetButtonDown("Jump") && GroundCheck()) {
             yVel = jumpForce;
+            jumpSound.Play();
         }
         rb2d.velocity = new Vector2(Input.GetAxisRaw("Horizontal") * (walkSpeed + moveSpeed), yVel);
         // this calls the animation
