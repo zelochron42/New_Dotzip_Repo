@@ -6,7 +6,7 @@ using Photon.Pun;
 /// <summary>
 /// Script to randomly spawn hazards in different locations on the screen 
 /// </summary>
-public class HazardSpawnerScript : MonoBehaviour
+public class HazardSpawnerScript : MonoBehaviourPunCallbacks
 {
     [SerializeField] bool debugMode;
     [System.Serializable]
@@ -46,8 +46,6 @@ public class HazardSpawnerScript : MonoBehaviour
         AdminPings ap = FindObjectOfType<AdminPings>();
         if (ap)
             adminClient = true;
-        else
-            Destroy(gameObject);
     }
     void FixedUpdate()
     {

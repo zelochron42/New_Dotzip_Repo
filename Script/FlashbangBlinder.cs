@@ -7,8 +7,10 @@ public class FlashbangBlinder : MonoBehaviour
 {
     [SerializeField] float blindDelay = 2f;
     DisruptionScreen ds;
+    PhotonView pv;
     void Start()
     {
+        pv = GetComponent<PhotonView>();
         ds = FindObjectOfType<DisruptionScreen>();
         if (ds)
             StartCoroutine("BlindRoutine");
@@ -26,7 +28,7 @@ public class FlashbangBlinder : MonoBehaviour
         if (ds && canSee)
             ds.Disrupt();
         yield return null;
-        PhotonNetwork.Destroy(gameObject);
+        pv.RPC("NetworkRemove", pv.Owner);
         yield break;
     }
 }

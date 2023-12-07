@@ -43,6 +43,12 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed -= bonusSpeedDecay;
         else
             moveSpeed = 0f;
+
+        Camera mainCam = Camera.main;
+        Vector2 camTop = mainCam.ViewportToWorldPoint(new Vector2(0f, 1f));
+        Vector2 camBot = mainCam.ViewportToWorldPoint(new Vector2(0f, 0f));
+        if (transform.position.y <= camBot.y)
+            transform.position = new Vector2(transform.position.x, camTop.y);
     }
     private void Move ()
     { float yVel = rb2d.velocity.y;

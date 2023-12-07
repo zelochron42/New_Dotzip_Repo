@@ -34,7 +34,6 @@ public class Powerup_ALT : MonoBehaviour
         if (PhotonNetwork.LocalPlayer != plr)
             return;
         powerupEffect.Apply(go);
-        pv.TransferOwnership(plr);
-        PhotonNetwork.Destroy(gameObject);
+        pv.RPC("NetworkRemove", pv.Owner);
     }
 }

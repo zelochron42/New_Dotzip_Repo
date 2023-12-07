@@ -49,8 +49,10 @@ public class PlayerHealthStatus : MonoBehaviour
             Destroy(go);
             return;
         }
-        pv.TransferOwnership(PhotonNetwork.LocalPlayer);
-        PhotonNetwork.Destroy(go);
+        SelfCleanup sc = go.GetComponent<SelfCleanup>();
+        if (sc)
+            pv.RPC("NetworkRemove", pv.Owner);
+        
     }
 
     void TakeDamage(int damage)

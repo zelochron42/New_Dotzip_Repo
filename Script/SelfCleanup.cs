@@ -10,19 +10,29 @@ using UnityEngine;
 public class SelfCleanup : MonoBehaviourPunCallbacks {
     [SerializeField] float lifetime = 1f;
     float timeAlive = 0f;
+    bool isMine = false;
     public void SetLifetime(float life) {
         lifetime = life;
     }
     private void Awake() {
-        if (!photonView.IsMine) {
-            this.enabled = false;
-        }
+        isMine = photonView.IsMine;
     }
     void Update()
     {
+        if (isMine)
+            RemovalLoop();
+    }
+
+    void RemovalLoop() {
         timeAlive += Time.deltaTime;
         if (timeAlive >= lifetime) {
             PhotonNetwork.Destroy(gameObject);
         }
+    }
+
+    [PunRPC]
+    public void NetworkRemove() {
+        if (isMine)
+            PhotonNetwork.Destroy(gameObject);
     }
 }

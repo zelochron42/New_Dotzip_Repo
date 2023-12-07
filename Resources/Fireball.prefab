@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3418567458585865877}
   - component: {fileID: 6131942046511314356}
   - component: {fileID: 4625565131223927495}
+  - component: {fileID: 8948521823949163722}
   m_Layer: 0
   m_Name: Fireball
   m_TagString: Poison
@@ -146,3 +147,16 @@ CircleCollider2D:
   m_Offset: {x: 0.15, y: 0}
   serializedVersion: 2
   m_Radius: 0.73142856
+--- !u!114 &8948521823949163722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296387864283009776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bde3abdf42062df478ab0f162deafbae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 3
