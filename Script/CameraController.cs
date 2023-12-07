@@ -14,6 +14,11 @@ public class CameraController : MonoBehaviour
         if (FindObjectOfType<AdminPings>()) {
             cam.orthographicSize = adminCamSize;
         }
+        else {
+            Animator anim = GetComponent<Animator>();
+            if (anim)
+                anim.enabled = false;
+        }
     }
 
 
