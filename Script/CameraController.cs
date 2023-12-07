@@ -23,11 +23,11 @@ public class CameraController : MonoBehaviour
 
 
     private void Update() {
-        float step = 5;
+        /*float step = 5;
 
         var cameraPosition = Camera.main.gameObject.transform.position;
         cameraPosition.x += step;
-        Camera.main.gameObject.transform.position = cameraPosition;
+        Camera.main.gameObject.transform.position = cameraPosition;*/
     }    
 }
 
