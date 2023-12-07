@@ -14,15 +14,20 @@ public class CameraController : MonoBehaviour
         if (FindObjectOfType<AdminPings>()) {
             cam.orthographicSize = adminCamSize;
         }
+        else {
+            Animator anim = GetComponent<Animator>();
+            if (anim)
+                anim.enabled = false;
+        }
     }
 
 
     private void Update() {
-        float step = 5;
+        /*float step = 5;
 
         var cameraPosition = Camera.main.gameObject.transform.position;
         cameraPosition.x += step;
-        Camera.main.gameObject.transform.position = cameraPosition;
+        Camera.main.gameObject.transform.position = cameraPosition;*/
     }    
 }
 
