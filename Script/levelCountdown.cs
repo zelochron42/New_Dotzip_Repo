@@ -20,11 +20,15 @@ public class levelCountdown : MonoBehaviour
 
     private void FixedUpdate()
     {
-        addtime();
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonView photonView = GetComponent<PhotonView>();
+            photonView.RPC("addtime", RpcTarget.All, timeCount);
+        }
     }
 
     [PunRPC]
-    public void addtime()
+    public void addtime(float timeCount)
     {
         //add a point every second as the scene is loaded
         timeCount += 1 * Time.deltaTime;
