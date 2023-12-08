@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class levelCountdown : MonoBehaviour
 {
@@ -21,6 +23,7 @@ public class levelCountdown : MonoBehaviour
         addtime();
     }
 
+    [PunRPC]
     public void addtime()
     {
         //add a point every second as the scene is loaded
