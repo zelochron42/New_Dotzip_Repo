@@ -47,9 +47,12 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = 0f;
 
         Camera mainCam = Camera.main;
-        Vector2 camTop = mainCam.ViewportToWorldPoint(new Vector2(0f, 1f));
+        Vector2 camTop = mainCam.ViewportToWorldPoint(new Vector2(1f, 1f));
         Vector2 camBot = mainCam.ViewportToWorldPoint(new Vector2(0f, 0f));
-        if (transform.position.y <= camBot.y) {
+        if (transform.position.x <= camBot.x || transform.position.x >= camTop.x) {
+            transform.position = new Vector2(mainCam.transform.position.x, camTop.y);
+            playerHealth.TakeDamage(1);
+        } else if (transform.position.y <= camBot.y) {
             transform.position = new Vector2(transform.position.x, camTop.y);
             playerHealth.TakeDamage(1);
         }

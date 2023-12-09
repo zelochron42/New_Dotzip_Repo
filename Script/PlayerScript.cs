@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
+//this code ensures that players are only controlled by their owner client, and not by all other players
 public class PlayerScript : MonoBehaviourPunCallbacks
 {
    
@@ -22,6 +23,11 @@ public class PlayerScript : MonoBehaviourPunCallbacks
                 Destroy(phs);
         }
         DontDestroyOnLoad(gameObject);
+    }
+
+    [PunRPC]
+    void DisableSelf() {
+        gameObject.SetActive(false);
     }
 
     void Update()
