@@ -1089,7 +1089,7 @@ MonoBehaviour:
     localSpawnOnly: 1
     fixedOffset: {x: 4.23, y: 4.47}
     randomOffset: {x: 10.5, y: 0.66}
-    maxSpawnDelay: 100
+    maxSpawnDelay: 60
     delayRandomness: 23.7
     timeSinceLastSpawn: 0
     displayGizmos: 0
@@ -1097,7 +1097,7 @@ MonoBehaviour:
     localSpawnOnly: 1
     fixedOffset: {x: 4.11, y: -4.43}
     randomOffset: {x: 10.5, y: 0.66}
-    maxSpawnDelay: 400
+    maxSpawnDelay: 600
     delayRandomness: 80
     timeSinceLastSpawn: 0
     displayGizmos: 0

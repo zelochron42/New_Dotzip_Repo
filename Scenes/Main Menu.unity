@@ -1398,7 +1398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameScene: Level 1
-  minimumPlayerCount: 1
+  minimumPlayerCount: 2
   text: {fileID: 2117619110}
   adminObject: {fileID: 7658669263319059435, guid: 5877249ce95d4cd47860c8c86c9ab695, type: 3}
 --- !u!4 &538719207
