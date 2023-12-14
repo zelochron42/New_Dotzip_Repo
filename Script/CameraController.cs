@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
+[RequireComponent(typeof(PhotonView))]
 public class CameraController : MonoBehaviour
 {
     [SerializeField] bool debugMode = false;
@@ -14,8 +16,8 @@ public class CameraController : MonoBehaviour
             return;
         if (FindObjectOfType<AdminPings>()) {
             cam.orthographicSize = adminCamSize;
-        }
-        else if (!debugMode) {
+            GetComponent<PhotonView>().RequestOwnership();
+        } else if (!debugMode) {
             Animator anim = GetComponent<Animator>();
             if (anim)
                 anim.enabled = false;

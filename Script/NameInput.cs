@@ -15,22 +15,22 @@ public class NameInput : MonoBehaviour
     {
         SetUpInputField();
     }
-private void SetUpInputField(){
-if (!PlayerPrefs.HasKey(PlayerPrefsNameKey)){return;}
-string defaultName = PlayerPrefs.GetString(PlayerPrefsNameKey);
-nameInputField.text = defaultName;
-SetPlayerName(defaultName);
-}
-public void SetPlayerName(string name){
-    continueButton.interactable = !string.IsNullOrEmpty(name);
-}
-public void SavePlayerName(){
-    string PlayerName = nameInputField.text;
+    private void SetUpInputField(){
+    if (!PlayerPrefs.HasKey(PlayerPrefsNameKey)){return;}
+        string defaultName = PlayerPrefs.GetString(PlayerPrefsNameKey);
+        nameInputField.text = defaultName;
+        SetPlayerName(defaultName);
+    }
+    public void SetPlayerName(string name){
+        continueButton.interactable = !string.IsNullOrEmpty(name);
+    }
+    public void SavePlayerName(){
+        string PlayerName = nameInputField.text;
 
-    PhotonNetwork.NickName = PlayerName;
+        PhotonNetwork.NickName = PlayerName;
 
-    PlayerPrefs.SetString(PlayerPrefsNameKey, PlayerName);
-}
+        PlayerPrefs.SetString(PlayerPrefsNameKey, PlayerName);
+    }
     // Update is called once per frame
     void Update()
     {

@@ -30,6 +30,15 @@ public class levelCountdown : MonoBehaviourPunCallbacks, IPunObservable
     void Update()
     {
         timeCountText.text = "Current Time: " + timeCount.ToString("0.0");
+        if (timeCount >= 130f) {
+            RoundScorer rs = FindObjectOfType<RoundScorer>();
+            if (!rs)
+                return;
+            PhotonView pv = rs.GetComponent<PhotonView>();
+            if (!pv)
+                return;
+            pv.RPC("RoundOver", PhotonNetwork.MasterClient);
+        }
     }
 
 
@@ -43,7 +52,7 @@ public class levelCountdown : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting) {
             stream.SendNext(timeCount);
         }
-        else {
+        else if (stream.IsReading) {
             timeCount = (float)stream.ReceiveNext();
         }
     }

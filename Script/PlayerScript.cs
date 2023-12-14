@@ -15,20 +15,28 @@ public class PlayerScript : MonoBehaviourPunCallbacks
     void Awake()
     {
         PlayerHealthStatus phs = GetComponent<PlayerHealthStatus>();
-        gameOverCanvas = FindObjectOfType<UIManager>().gameObject;
-        gameOverCanvas.SetActive(false);
+        UIManager canvasUI = FindObjectOfType<UIManager>();
+        if (canvasUI) {
+            gameOverCanvas = canvasUI.gameObject;
+            gameOverCanvas.SetActive(false);
+        }
 
         if (!photonView.IsMine) {
             PlayerMovement pm = GetComponent<PlayerMovement>();
-            if (pm)
+            if (pm) {
+                pm.enabled = false;
                 Destroy(pm);
-            if (phs)
+            }
+            if (phs) {
+                phs.enabled = false;
                 Destroy(phs);
+            }
         }
-        else if (phs) {
-            ConnectScorer(phs);
+        else {
+            //DontDestroyOnLoad(gameObject);
+            if (phs)
+                ConnectScorer(phs);
         }
-        DontDestroyOnLoad(gameObject);
     }
 
     void ConnectScorer(PlayerHealthStatus phs) {
@@ -44,9 +52,12 @@ public class PlayerScript : MonoBehaviourPunCallbacks
         }
         scoreView.RPC("PlayerSpawned", PhotonNetwork.MasterClient);
         phs.OnPlayerDeath.AddListener(() => {
-            scoreView.RPC("PlayerDied", PhotonNetwork.MasterClient);
+            phs.OnPlayerDeath.RemoveAllListeners();
+            if (scoreView)
+                scoreView.RPC("PlayerDied", PhotonNetwork.MasterClient);
+            if (gameOverCanvas)
+                gameOverCanvas.SetActive(true);
             DestroyPlayer();
-            gameOverCanvas.SetActive(true);
         });
 
     }
@@ -55,8 +66,9 @@ public class PlayerScript : MonoBehaviourPunCallbacks
     void DisableSelf() {
         gameObject.SetActive(false);
     }
+    [PunRPC]
     private void DestroyPlayer() // reference for the script:
     {
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 }

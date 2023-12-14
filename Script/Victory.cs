@@ -23,32 +23,8 @@ public class Victory : MonoBehaviourPunCallbacks
             PhotonView pv = collision.gameObject.GetComponent<PhotonView>();
             if (!pv || pv.Owner != PhotonNetwork.LocalPlayer)
                 return;
-            pv.RPC("DisableSelf", RpcTarget.All);
+            scorer.GetComponent<PhotonView>().RPC("PlayerWon", PhotonNetwork.MasterClient);
+            pv.RPC("DestroyPlayer", pv.Owner);
         }
-        //Debug.Log("You Win");
-        //SceneManager.LoadScene(levelScene);
-
-    }
-    void CheckGameover() { //checking to make sure all the players have either died or been set inactive before advancing the scene
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        if (!started) {
-            if (players.Length > 0)
-                started = true;
-            else
-                return;
-        }
-        foreach (GameObject p in players) {
-            if (p.activeInHierarchy == true)
-                return;
-        }
-
-        PhotonView scoreView = scorer.GetComponent<PhotonView>();
-        if (scoreView)
-            scoreView.RPC("RoundOver", PhotonNetwork.MasterClient);
-        //TODO: add a hard-limit to level time to stop matches from going on indefinitely with one living player
-    }
-
-    private void Update() {
-        CheckGameover();
     }
 }
