@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    [SerializeField] bool debugMode = false;
     [SerializeField] float adminCamSize = 10f;
     // Start is called before the first frame update
     void Start()
@@ -14,7 +15,7 @@ public class CameraController : MonoBehaviour
         if (FindObjectOfType<AdminPings>()) {
             cam.orthographicSize = adminCamSize;
         }
-        else {
+        else if (!debugMode) {
             Animator anim = GetComponent<Animator>();
             if (anim)
                 anim.enabled = false;
