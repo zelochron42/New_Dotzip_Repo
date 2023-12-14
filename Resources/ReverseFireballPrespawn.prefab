@@ -97,5 +97,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d55bc523a173e546b0b4e1f8c00d742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayTime: 2
+  delayTime: 1
   spawnObject: {fileID: 296387864283009776, guid: 3132fb973e9c48f478a332a41dd124b2, type: 3}

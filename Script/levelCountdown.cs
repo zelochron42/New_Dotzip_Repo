@@ -6,7 +6,7 @@ using UnityEngine.SocialPlatforms.Impl;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class levelCountdown : MonoBehaviour
+public class levelCountdown : MonoBehaviourPunCallbacks, IPunObservable
 {
 
     public TextMeshProUGUI timeCountText;
@@ -19,19 +19,41 @@ public class levelCountdown : MonoBehaviour
     }
 
     private void FixedUpdate()
+    {            
+            if (PhotonNetwork.IsMasterClient)
+                //add a point every second as the scene is loaded
+                timeCount += 1 * Time.deltaTime;
+
+            //commented out RPC code to try OnPhotonSerializeView instead
+            //photonView.RPC("addtime", RpcTarget.All, timeCount);
+    }
+    void Update()
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            PhotonView photonView = GetComponent<PhotonView>();
-            photonView.RPC("addtime", RpcTarget.All, timeCount);
+        timeCountText.text = "Current Time: " + timeCount.ToString("0.0");
+        if (timeCount >= 130f) {
+            RoundScorer rs = FindObjectOfType<RoundScorer>();
+            if (!rs)
+                return;
+            PhotonView pv = rs.GetComponent<PhotonView>();
+            if (!pv)
+                return;
+            pv.RPC("RoundOver", PhotonNetwork.MasterClient);
         }
     }
 
-    [PunRPC]
+
+    /*[PunRPC]
     public void addtime(float timeCount)
     {
-        //add a point every second as the scene is loaded
-        timeCount += 1 * Time.deltaTime;
         timeCountText.text = "Current Time: " + timeCount.ToString("0.0");
+    }*/
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
+        if (stream.IsWriting) {
+            stream.SendNext(timeCount);
+        }
+        else if (stream.IsReading) {
+            timeCount = (float)stream.ReceiveNext();
+        }
     }
 }

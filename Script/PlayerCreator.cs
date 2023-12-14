@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerCreator : MonoBehaviourPunCallbacks {
     [SerializeField] private GameObject PlayerPrefab;
     [SerializeField] GameObject healthbarPrefab;
-
+    [SerializeField] Canvas sceneCanvas;
     [SerializeField] bool spawnReady = false;
     [SerializeField] bool playerSpawned = false;
     private void Start() {
@@ -20,8 +20,8 @@ public class PlayerCreator : MonoBehaviourPunCallbacks {
         spawnReady = true;
     }
     void SpawnPlayer() {
-        Canvas c = FindObjectOfType<Canvas>();
-        Instantiate(healthbarPrefab, c.transform);
+        //Canvas c = FindObjectOfType<Canvas>();
+        Instantiate(healthbarPrefab, sceneCanvas.transform);
         Vector2 offset = new Vector2(Random.Range(-1.5f, 1.5f), Random.Range(-1.5f, 1.5f));
         Vector2 spawnPos = (Vector2)Camera.main.transform.position + offset;
         PhotonNetwork.Instantiate(PlayerPrefab.name, spawnPos, PlayerPrefab.transform.rotation);

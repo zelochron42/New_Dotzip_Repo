@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour
     Collider2D col2d;
 
     PlayerHealthStatus playerHealth;
-    GameObject gameOverCanvas;
     public float moveSpeed;
     [SerializeField] float bonusSpeedDecay = 0.01f;
 
@@ -27,12 +26,6 @@ public class PlayerMovement : MonoBehaviour
         jumpSound = GetComponent<AudioSource>();
         SpriteRenderer = GetComponent<SpriteRenderer>();
         playerHealth = FindObjectOfType<PlayerHealthStatus>();
-        gameOverCanvas = FindObjectOfType<UIManager>().gameObject;
-        gameOverCanvas.SetActive(false);
-        playerHealth.OnPlayerDeath.AddListener(() => {
-            DestroyPlayer();
-            gameOverCanvas.SetActive(true);
-        });
     }
 
     // Update is called once per frame
@@ -82,8 +75,5 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void DestroyPlayer() // reference for the script:
-    {
-        Destroy(gameObject);
-    }
+    
 }
